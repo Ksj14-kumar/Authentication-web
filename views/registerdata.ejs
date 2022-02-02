@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("./partials/header.ejs",{title:"Registration Page"}) %>
+
+
+        <%- include("./partials/registerStyle.ejs") %>
+
+</head>
+
+<body>
+    <div class="container-fluid   d-flex justify-content-between px-5 py-4">
+        <div class="left-side shadow ">
+            <form action="/register" method="POST" class="form-group p-4 rounded"
+                enctype="application/x-www-form-urlencoded">
+                <div class="form-group py-2">
+                    <h3 class="text-white
+                        ">Create account</h3>
+                    <div id="name outer">
+                        <label for="name">Full Name</label> <input type="text" name="name" class="form-control" value=""
+                            onblur="name1()" placeholder="name" id="full_name" required>
+                        <!-- <i class="fa fa-exclamation-circle" id="faec" aria-hidden="true"></i>
+                    <i class="far fa-check-circle" id="facc"></i> -->
+                        <small style="color: red;" id="nameError"></small>
+
+                    </div>
+                    <div id="email outer">
+
+                        <label for="name">Email</label> <input type="email" name="email" placeholder="name@example.com"
+                            onblur="emailF()" value="" class="form-control" id="email1" required>
+                        <!-- <i class="fa fa-exclamation-circle" aria-hidden="true"></i> -->
+                        <!-- <i class="far fa-check-circle"></i> -->
+                        <small id="smallEmail" style="color: red;"></small>
+                    </div>
+
+                    <div id="password outer">
+                        <label for="name">Passwpord</label> <input type="password" name="password" class="form-control"
+                            placeholder="password" value="" onblur="password1()" id="password1" required>
+                        <!-- <i class="fa fa-exclamation-circle" aria-hidden="true"></i> -->
+                        <!-- <i class="far fa-check-circle"></i> -->
+                        <small id="smallPassword" style="color: red;"></small>
+
+                    </div>
+
+                    <div id="cpassword outer">
+                        <label for="name">Confirm Password</label> <input type="password" name="cpassword"
+                            class="form-control" value="" id="cpassword1" placeholder="Confirm password"
+                            onblur="password2()" required>
+                        <i class="fa fa-exclamation-circle" aria/-hidden="true"></i>
+                        <!-- <i class="far fa-check-circle"></i> -->
+                        <small id="smallCpassword" style="color: red;"></small>
+
+                    </div>
+
+
+                    <!-- <label for="name">Photos</label> <input type="file" name="file" class="form-control" id="" required> -->
+                </div>
+                <button type="submit" class="btn btn-success" id="submit">Submit </button>
+                <a href="/singin" class="btn btn-success">login </a>
+                <a href="/" class="btn btn-success">Home </a>
+
+
+            </form>
+
+
+        </div>
+    </div>
+
+    <script>
+
+        function name1() {
+            const nameValue = document.getElementById("full_name")
+            const smallNameText = document.getElementById("nameError")
+            if (nameValue.value == "") {
+                nameValue.style.border = "2px solid red"
+                alert("Name Can not be empty")
+                // smallNameText.innerText = "Name Can not be empty"
+                return false
+            }
+            else if (nameValue.value.length < 2) {
+                nameValue.style.border = "2px solid red"
+                alert("Name Can not be less than 2 character")
+                // smallNameText.innerText = "Name Can not be less than 2 character"
+                return false
+
+            }
+            else {
+                function checkName(value) {
+                    const pattern = /^[A-Za-z]+$/
+                    return pattern.test(value)
+                }
+                if (!checkName(nameValue.value)) {
+                    nameValue.style.border = "2px solid red"
+                    alert("Name not cantain any special")
+                    // smallNameText.innerText = "Name not cantain any special character"
+                    return false
+
+
+                }
+                else {
+                    nameValue.style.border = "2px solid green"
+                    smallNameText.style.display = "none"
+                    return true
+
+                }
+
+            }
+        }
+
+
+        function emailF() {
+            const emailValue = document.getElementById("email1")
+            const smallText = document.getElementById("smallEmail")
+            if (emailValue.value == "") {
+                emailValue.style.border = "2px solid red"
+                // alert("Email can not be null")
+
+            }
+            else {
+                function isEmailValid(e) {
+                    const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+                    return pattern.test(e)
+                }
+                if (!isEmailValid(emailValue.value)) {
+
+                    emailValue.style.border = "2px solid red"
+                    alert("Invalid Email")
+                    // smallText.innerText = "Invalid Email"
+                    return false
+                }
+                else {
+                    emailValue.style.border = "2px solid green"
+                    smallText.style.display = "none"
+                    return true
+                }
+            }
+        }
+
+
+        function password1() {
+            const passwordValue = document.getElementById("password1")
+            const smallPasswordText = document.getElementById("smallPassword")
+            if (passwordValue.value == "") {
+                passwordValue.style.border = "2px solid red"
+                alert("Password can not be empty")
+                // smallPasswordText.innerText = "Password can not be empty"
+                return false
+
+            }
+
+            else {
+                if (passwordValue.value.length < 8) {
+                    passwordValue.style.border = "2px solid red"
+                    alert("password must be greater than 8 letter")
+                    // smallPasswordText.innerText = "password must be greater than 8 letter"
+                    return false
+
+                }
+
+                function checkPassowrd(pass) {
+                    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+                    return pattern.test(pass)
+                }
+                if (!checkPassowrd(passwordValue.value)) {
+
+                    passwordValue.style.border = "2px solid red"
+                    alert("password contain at least one special character,one Number, one small and one capital letter")
+                    return false
+
+                }
+                else {
+                    passwordValue.style.border = "2px solid green"
+                    smallPasswordText.style.display = "none"
+                    return true
+                }
+
+            }
+
+        }
+
+        function password2() {
+            const cpasswordValue = document.getElementById("cpassword1")
+            const smallCtext = document.getElementById("smallCpassword")
+            if (cpasswordValue.value == "") {
+                cpasswordValue.style.border = "2px solid red"
+                alert("confirm password can not be empty")
+                // smallCtext.innerText = "confirm password can not be empty"
+                return false
+            }
+            else {
+                if (cpasswordValue.value.length < 8) {
+                    cpasswordValue.style.border = "2px solid red"
+                    alert("password must be greater than 8 letter")
+                    // smallCtext.innerText = "password must be greater than 8 letter"
+                    return false
+
+                }
+                function checkPassowrd(pass) {
+                    const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+                    return pattern.test(pass)
+                }
+                if (!checkPassowrd(cpasswordValue.value)) {
+                    cpasswordValue.style.border = "2px solid red"
+                    alert("password contain at least one special character,one Number, one small and one capital letter")
+                    return false
+
+                }
+                else {
+
+
+                    cpasswordValue.style.border = "2px solid green"
+                    smallCtext.style.display = "none"
+                    return true
+                }
+
+                if (cpasswordValue.value != document.getElementById("password").value) {
+                    cpasswordValue.style.border = "2px solid red"
+                    document.getElementById("password").style.border = "2px solid red"
+                    alert("password must be same")
+                    return false
+                }
+
+
+
+
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>

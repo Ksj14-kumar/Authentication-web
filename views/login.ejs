@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include("./partials/header.ejs",{title:"Login Page"}) %>
+        <%- include("./partials/loginStyle.ejs") %>
+</head>
+
+
+<body class="">
+
+
+    <div class="container-fluid bg-warning ">
+        <div class="login-page shadow p-4">
+            <!-- <div id="loginLogo">
+                <img src="./login-icon-3048.png" alt="" srcset="">
+            </div> -->
+            <form action="/login" method="POST" class="form-group" enctype="application/x-www-form-urlencoded"
+                autocomplete="on">
+                <div class="email">
+                    <label for="email"><i>Email</i></label>
+                    <input type="email" name="email" class="form-control" id="email" required>
+                </div>
+                <div class="password">
+                    <label for="email"><i>Password</i></label>
+                    <input type="password" name="password" class="form-control" id="password" required>
+                </div>
+
+                <div class="btn-group px-2 mt-3">
+
+                    <button type="submit" class="btn btn-success my-2" id="login" href="#">login</button>
+
+
+                    <a class="btn btn-success my-2" href="/singup">Sign Up</a>
+                </div>
+            </form>
+            <div class="recover-password">
+                <em><strong>forget your password <a href="#">Click here</a></strong></em>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+
+        var email = document.querySelector("#email")
+        var password = document.querySelector("#password")
+        var login = document.querySelector("#login")
+
+
+
+        function isEmailValid(e) {
+            var pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+            return pattern.test(e)
+
+        }
+        window.oncu
+
+
+        login.addEventListener("submit", (e) => {
+
+            if (email.value == "" || password.value == "") {
+                window.alert("please, fill all data correctly")
+            }
+
+
+        })
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
